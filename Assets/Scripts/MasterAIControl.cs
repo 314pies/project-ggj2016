@@ -3,9 +3,9 @@ using System.Collections;
 
 public class MasterAIControl
 {
-	private MasterCharacter character = null;
+	private Master character = null;
 
-	public MasterAIControl(MasterCharacter character)
+	public MasterAIControl(Master character)
 	{
 		this.character = character;
 	}

@@ -114,7 +114,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5870f9de4e0c34298ae7bf9d0eacc849, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterView: {fileID: 11436440, guid: 68e260981d57547df9095c3944fa736d, type: 2}
+  gameSetting:
+    AIControlSetting:
+      controlChangingTime: .200000003
+    characterSetting:
+      moveSpeed: 2
+      border: {x: 3, y: 2.5}
+    masterSetting:
+      moveSpeed: 2
+      border: {x: 3, y: 2.5}
+      rotateSpeed: 100
+      circleRangeInTextureSize: 10
+      rangeTextureSizeToUnitValue: .0799999982
+  masterView: {fileID: 11424722, guid: 68e260981d57547df9095c3944fa736d, type: 2}
   characterView: {fileID: 11436440, guid: ff6841550a50b49f5b3f3e084d2de59d, type: 2}
   AINumber: 30
 --- !u!4 &345038355
@@ -189,7 +201,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2
+  orthographic size: 3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

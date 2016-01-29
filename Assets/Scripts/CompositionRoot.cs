@@ -1,47 +1,62 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class CompositionRoot : MonoBehaviour {
-	[SerializeField]
-	private MasterView masterView = null;
-	[SerializeField]
-	private CharacterView characterView = null;
-	[SerializeField]
-	private int AINumber = 30;
+[System.Serializable]
+public class GameSetting
+{
+    public AIControlSetting AIControlSetting = null;
+    public CharacterSetting characterSetting = null;
+    public MasterSetting masterSetting = null;
+}
 
-	private GameManager gameManager = null;
-	private ControllerManager controllerManager = null;
-	
-	private void Awake()
-	{
-		// Player
-		CharacterView playerView = Instantiate (characterView);
-		Character player = new Character (playerView);
-		PlayerControl playerControl = new PlayerControl (player);
+public class CompositionRoot : MonoBehaviour
+{
+    [SerializeField]
+    private GameSetting gameSetting = null;
+    [SerializeField]
+    private MasterView masterView = null;
+    [SerializeField]
+    private CharacterView characterView = null;
+    [SerializeField]
+    private int AINumber = 30;
 
-		// AI
-		List<AIControl> AIControlList = new List<AIControl> ();
-		List<Character> AICharacter = new List<Character> ();
-		for (int i = 0; i < AINumber; ++i) {
-			CharacterView view = Instantiate (characterView);
-			Character character = new Character (view);
-			AIControl aiControl = new AIControl(character);
-			AIControlList.Add(aiControl);
-			AICharacter.Add (character);
-		}
+    private GameManager gameManager = null;
+    private ControllerManager controllerManager = null;
 
-		// Master
-		MasterView viewMaster = Instantiate (masterView);
-		MasterCharacter master = new MasterCharacter (viewMaster);
-		MasterAIControl masterControl = new MasterAIControl (master);
+    private void Awake()
+    {
+        // Player
+        CharacterView playerView = Instantiate( characterView );
+        playerView.Initialize( gameSetting.characterSetting );
+        Character player = new Character( playerView );
+        PlayerControl playerControl = new PlayerControl( player );
 
-		gameManager = new GameManager (player, AICharacter,master);
-		controllerManager =new ControllerManager (playerControl, AIControlList, masterControl);
-	}
+        // AI
+        List<AIControl> AIControlList = new List<AIControl>();
+        List<Character> AICharacter = new List<Character>();
+        for ( int i = 0; i < AINumber; ++i )
+        {
+            CharacterView view = Instantiate( characterView );
+            view.Initialize( gameSetting.characterSetting );
+            Character character = new Character( view );
+            AIControl aiControl = new AIControl( gameSetting.AIControlSetting, character );
+            AIControlList.Add( aiControl );
+            AICharacter.Add( character );
+        }
 
-	private void Update()
-	{
-		gameManager.Tick ();
-		controllerManager.Tick ();
-	}
+        // Master
+        MasterView viewMaster = Instantiate( masterView );
+        viewMaster.Initialize( gameSetting.masterSetting );
+        Master master = new Master( viewMaster );
+        MasterAIControl masterControl = new MasterAIControl( master );
+
+        gameManager = new GameManager( player, AICharacter, master );
+        controllerManager = new ControllerManager( playerControl, AIControlList, masterControl );
+    }
+
+    private void Update()
+    {
+        gameManager.Tick();
+        controllerManager.Tick();
+    }
 }

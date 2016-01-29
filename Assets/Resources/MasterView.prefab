@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 484938}
   - 212: {fileID: 21254232}
   - 114: {fileID: 11436440}
+  - 114: {fileID: 11424722}
   m_Layer: 0
   m_Name: MasterView
   m_TagString: Untagged
@@ -58,6 +59,21 @@ Transform:
   - {fileID: 480534}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11424722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 734014d4aa8914ece874d4f2010b52b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
+  posLimit: {x: 3, y: 2.5}
+  circleRange: 10
+  circleLight: {fileID: 480534}
 --- !u!114 &11436440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,6 +170,10 @@ Prefab:
       propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: circleLight
+      value: 
+      objectReference: {fileID: 480534}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 187004}

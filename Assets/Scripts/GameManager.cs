@@ -6,9 +6,9 @@ public class GameManager
 {
 	private Character player = null;
 	private List<Character> aiCharacterList = null;
-	private MasterCharacter master = null;
+	private Master master = null;
 
-	public GameManager(Character player, List<Character> aiCharacterList, MasterCharacter master)
+	public GameManager(Character player, List<Character> aiCharacterList, Master master)
 	{
 		this.player = player;
 		this.aiCharacterList = aiCharacterList;
