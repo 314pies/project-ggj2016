@@ -11,6 +11,17 @@ public class CharacterView : MonoBehaviour
         this.characterSetting = characterSetting;
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_transform = transform;
+
+        Reset();
+    }
+
+    public void Reset()
+    {
+        m_transform.localPosition = new Vector2(
+            Random.Range( -characterSetting.border.x, characterSetting.border.x ),
+            Random.Range( -characterSetting.border.y, characterSetting.border.y ) );
+
+        m_spriteRenderer.color = Color.white;
     }
 
     public void Translate( float x, float y )
@@ -29,5 +40,10 @@ public class CharacterView : MonoBehaviour
     public void DoAction( bool active )
     {
         m_spriteRenderer.color = active ? Color.black : Color.white;
+    }
+
+    public void PlayDieAnim()
+    {
+        m_spriteRenderer.color = Color.blue;
     }
 }

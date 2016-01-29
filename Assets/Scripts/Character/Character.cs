@@ -12,10 +12,18 @@ public class Character
     public Vector2 Position = Vector2.zero;
     private CharacterView characterView = null;
     private bool isDoingAction = false;
+    private bool isAlive = true;
 
     public Character( CharacterView characterView )
     {
         this.characterView = characterView;
+    }
+
+    public void Reset()
+    {
+        isDoingAction = false;
+        isAlive = true;
+        characterView.Reset();
     }
 
     public Vector2 GetPosition()
@@ -25,23 +33,38 @@ public class Character
 
     public void Move( float x, float y )
     {
-        if ( isDoingAction == false )
-            characterView.Translate( x, y );
+        if ( isAlive )
+        {
+            if ( isDoingAction == false )
+                characterView.Translate( x, y );
+        }
     }
 
     public void DoAction( bool active )
     {
-        isDoingAction = active;
-        characterView.DoAction( active );
+        if ( isAlive )
+        {
+            isDoingAction = active;
+            characterView.DoAction( active );
+        }
+    }
+
+    public bool IsDoingAction()
+    {
+        return isDoingAction;
     }
 
     public void BePush()
     {
+        if ( isAlive )
+        {
 
+        }
     }
 
     public void Kill()
     {
-
+        isAlive = false;
+        characterView.PlayDieAnim();
     }
 }

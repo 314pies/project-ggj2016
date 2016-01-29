@@ -31,6 +31,12 @@ public class CompositionRoot : MonoBehaviour
         Character player = new Character( playerView );
         PlayerControl playerControl = new PlayerControl( player );
 
+        // Master
+        MasterView viewMaster = Instantiate( masterView );
+        viewMaster.Initialize( gameSetting.masterSetting );
+        Master master = new Master( viewMaster );
+        MasterAIControl masterControl = new MasterAIControl( master );
+
         // AI
         List<AIControl> AIControlList = new List<AIControl>();
         List<Character> AICharacter = new List<Character>();
@@ -39,16 +45,10 @@ public class CompositionRoot : MonoBehaviour
             CharacterView view = Instantiate( characterView );
             view.Initialize( gameSetting.characterSetting );
             Character character = new Character( view );
-            AIControl aiControl = new AIControl( gameSetting.AIControlSetting, character );
+            AIControl aiControl = new AIControl( gameSetting.AIControlSetting, character, master );
             AIControlList.Add( aiControl );
             AICharacter.Add( character );
         }
-
-        // Master
-        MasterView viewMaster = Instantiate( masterView );
-        viewMaster.Initialize( gameSetting.masterSetting );
-        Master master = new Master( viewMaster );
-        MasterAIControl masterControl = new MasterAIControl( master );
 
         gameManager = new GameManager( player, AICharacter, master );
         controllerManager = new ControllerManager( playerControl, AIControlList, masterControl );
@@ -56,7 +56,7 @@ public class CompositionRoot : MonoBehaviour
 
     private void Update()
     {
-        gameManager.Tick();
         controllerManager.Tick();
+        gameManager.Tick();
     }
 }
