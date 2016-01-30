@@ -5,12 +5,15 @@ public class CharacterView : MonoBehaviour
     private CharacterSetting characterSetting = null;
     private SpriteRenderer m_spriteRenderer;
     private Transform m_transform;
+    AudioManager audioManager;
 
     public void Initialize( CharacterSetting characterSetting )
     {
         this.characterSetting = characterSetting;
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_transform = transform;
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
 
         ResetPosition();
         ResetAnim();
@@ -86,6 +89,7 @@ public class CharacterView : MonoBehaviour
 
     public void PlayDieAnim()
     {
+        audioManager.PlaySound_CharDead();
         m_spriteRenderer.color = Color.blue;
     }
 }
