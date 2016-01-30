@@ -127,6 +127,8 @@ MonoBehaviour:
       rotateSpeed: 100
       circleRangeInTextureSize: 10
       rangeTextureSizeToUnitValue: .0799999982
+      searchAngle: 30
+      searchDistance: 2
   masterView: {fileID: 11424722, guid: 68e260981d57547df9095c3944fa736d, type: 2}
   characterView: {fileID: 11436440, guid: ff6841550a50b49f5b3f3e084d2de59d, type: 2}
   AINumber: 30

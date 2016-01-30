@@ -1,17 +1,14 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class MasterAIControl
+﻿public class MasterAIControl
 {
-	private Master character = null;
+    private Master character = null;
 
-	public MasterAIControl(Master character)
-	{
-		this.character = character;
-	}
-	
-	public void Tick()
-	{
-		character.CircleMove ();
-	}
+    public MasterAIControl( Master character )
+    {
+        this.character = character;
+    }
+
+    public void Tick()
+    {
+        character.CircleMove();
+    }
 }

@@ -44,7 +44,7 @@ public class AIControl
 
     private void UpdateActionDecision()
     {
-        if ( master.IsInCircleRange( character.GetPosition() ) == true )
+        if ( master.IsInLightRange( character.GetPosition() ) == true )
         {
             actionTimer = 0f;
             character.DoAction( true );

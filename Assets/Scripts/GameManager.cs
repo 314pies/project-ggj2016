@@ -18,14 +18,14 @@ public class GameManager
     {
         for ( int i = 0; i < aiCharacterList.Count; ++i )
         {
-            if ( master.IsInCircleRange( aiCharacterList[ i ].GetPosition() ) == true )
+            if ( master.IsInLightRange( aiCharacterList[ i ].GetPosition() ) == true )
             {
                 if ( aiCharacterList[ i ].IsDoingAction() == false )
                     aiCharacterList[ i ].Kill();
             }
         }
 
-        if ( master.IsInCircleRange( player.GetPosition() ) == true )
+        if ( master.IsInLightRange( player.GetPosition() ) == true )
         {
             if ( player.IsDoingAction() == false )
             {
