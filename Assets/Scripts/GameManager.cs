@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class GameManager
 {
+    private GameTime gameTime = null;
     private Character player = null;
     private List<Character> aiCharacterList = null;
     private Master master = null;
@@ -12,8 +13,9 @@ public class GameManager
     GameState gameState = GameState.Start;
     private int remainAINumber = 0;
 
-    public GameManager( ControllerManager controllerManager, Character player, List<Character> aiCharacterList, Master master )
+    public GameManager( GameTime gameTime, ControllerManager controllerManager, Character player, List<Character> aiCharacterList, Master master )
     {
+        this.gameTime = gameTime;
         this.controllerManager = controllerManager;
         this.player = player;
         this.aiCharacterList = aiCharacterList;
@@ -26,6 +28,7 @@ public class GameManager
     {
         if ( gameState == GameState.InGame )
         {
+            gameTime.Tick();
             controllerManager.Tick();
             for ( int i = 0; i < aiCharacterList.Count; ++i )
             {
@@ -63,12 +66,12 @@ public class GameManager
             if ( player.IsAlive() == false )
             {
                 gameState = GameState.Fail;
-                EventManager.TriggerEvent( "OnEnterFailState" );
+                EventManager.TriggerEvent( EventDictionary.ON_ENTER_FAILED_STATE );
             }
             else if ( remainAINumber == 0 )
             {
                 gameState = GameState.Success;
-                EventManager.TriggerEvent( "OnEnterSuccessState" );
+                EventManager.TriggerEvent( EventDictionary.ON_ENTER_SUCCESS_STATE );
             }
 
         }
@@ -82,7 +85,7 @@ public class GameManager
             {
                 ResetGame();
                 gameState = GameState.InGame;
-                EventManager.TriggerEvent( "OnEnterGameState" );
+                EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
             }
         }
         else if ( gameState == GameState.Success )
@@ -91,7 +94,7 @@ public class GameManager
             {
                 ResetGame();
                 gameState = GameState.InGame;
-                EventManager.TriggerEvent( "OnEnterGameState" );
+                EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
             }
         }
     }
@@ -99,7 +102,7 @@ public class GameManager
     void StartTheGame()
     {
         gameState = GameState.InGame;
-        EventManager.TriggerEvent( "OnEnterGameState" );
+        EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
     }
 
     private void ResetGame()
@@ -111,5 +114,6 @@ public class GameManager
         player.Reset();
 
         remainAINumber = aiCharacterList.Count;
+        gameTime.Reset();
     }
 }

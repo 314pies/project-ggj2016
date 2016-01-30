@@ -20,6 +20,9 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField]
     private int AINumber = 30;
 
+    [SerializeField]
+    private UI_SuccessPanel successPanel = null;
+
     private GameManager gameManager = null;
     private ControllerManager controllerManager = null;
 
@@ -50,9 +53,11 @@ public class CompositionRoot : MonoBehaviour
         Character player = new Character( playerView );
         PlayerControl playerControl = new PlayerControl( player, AICharacter );
 
+        GameTime gameTime = new GameTime();
         controllerManager = new ControllerManager(playerControl, AIControlList, masterControl);
-        gameManager = new GameManager(controllerManager, player, AICharacter, master );
-        
+        gameManager = new GameManager( gameTime, controllerManager, player, AICharacter, master );
+
+        successPanel.SetGameTime( gameTime );
     }
 
     private void Update()

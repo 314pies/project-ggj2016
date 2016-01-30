@@ -109,6 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08d461a799e0aad4c919b98d4f2d5ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MenuSoundEffect: {fileID: 0}
+  LoopSoundEffect: {fileID: 0}
+  IntroSoundEffect: {fileID: 0}
   DieSoundEffect:
   - {fileID: 8300000, guid: 672c5059ef5f0403b9a723177778c1d7, type: 3}
   - {fileID: 8300000, guid: 79ad305d995024d15962ec018e082186, type: 3}
