@@ -2,14 +2,32 @@
 using System.Collections;
 
 public class AudioManager : MonoBehaviour {
-
-    void Start()
+    private AudioSource audio=null;
+    public AudioClip MenuSoundEffect;
+    void Awake()
     {
         audio = GetComponent<AudioSource>();
+        audio.clip = MenuSoundEffect;
+        audio.Play();
+        EventManager.StartListening("OnEnterGameState", OnEnterGame);
     }
 
+    public AudioClip LoopSoundEffect;
+    public AudioClip IntroSoundEffect;
+    void OnEnterGame()
+    {
+        StartCoroutine(PlayIntroAndLoop());
+    }
+    IEnumerator PlayIntroAndLoop()
+    {
+        audio.Stop();
+        audio.PlayOneShot(IntroSoundEffect, 1.0f);
+        float PlayTime = IntroSoundEffect.length;
+        yield return new WaitForSeconds(PlayTime);
+        audio.clip = LoopSoundEffect;
+        audio.Play();
+    }
 
-    private AudioSource audio;
     public AudioClip[] DieSoundEffect = new AudioClip[5];
 	public void PlaySound_CharDead()
     {

@@ -474,6 +474,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b480e61236bde5f4fa678cb575ec25f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &1497976785
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 270
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 177.271881
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 437934, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8258700, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11408430, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: MenuSoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: c4251ce4c2d0c417caf393c43c75f960, type: 3}
+    - target: {fileID: 11408430, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: LoopSoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 356caa0579a6640d28cd8f4cbb65e28a, type: 3}
+    - target: {fileID: 11408430, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: IntroSoundEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: 690b894b97c23452881a5d048e6b5605, type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1556518849
 GameObject:
   m_ObjectHideFlags: 0
