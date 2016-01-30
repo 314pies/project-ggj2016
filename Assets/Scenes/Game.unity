@@ -387,8 +387,8 @@ MonoBehaviour:
       fallTime: 2
       fallSpeed: 1
       rotateSpeed: 100
-      circleRangeInTextureSize: 1
-      rangeTextureSizeToUnitValue: 3.20000005
+      circleRangeInTextureSize: 1.5
+      rangeTextureSizeToUnitValue: 2
       searchAngle: 30
       searchDistance: 3.4000001
   masterView: {fileID: 11424722, guid: 68e260981d57547df9095c3944fa736d, type: 2}

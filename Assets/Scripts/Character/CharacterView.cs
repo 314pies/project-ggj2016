@@ -15,6 +15,7 @@ public class CharacterView : MonoBehaviour
 
     private static readonly int NORMAL_HASH = Animator.StringToHash( "Normal" );
     private static readonly int MOVE_HASH = Animator.StringToHash( "Move" );
+    private static readonly int PUSH_HASH = Animator.StringToHash( "Push" );
     private static readonly int DO_ACTION_HASH = Animator.StringToHash( "DoSpecificAction" );
 
     public void Initialize( CharacterSetting characterSetting )
@@ -114,7 +115,7 @@ public class CharacterView : MonoBehaviour
 
     public void PlayPushAnim()
     {
-        m_spriteRenderer.color = Color.yellow;
+        animator.Play( PUSH_HASH );
     }
 
     public void PlayFallAnim()
