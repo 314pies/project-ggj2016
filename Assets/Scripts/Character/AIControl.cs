@@ -26,6 +26,7 @@ public class AIControl
 
     public void Tick()
     {
+        character.Tick();
         UpdateMoveDecision();
         UpdateActionDecision();
     }

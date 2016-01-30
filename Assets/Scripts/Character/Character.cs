@@ -5,6 +5,10 @@ public class CharacterSetting
 {
     public float moveSpeed = 2f;
     public Vector2 border = new Vector2( 3f, 2.5f );
+    public float pushRange = 0.5f;
+    public float pushTime = 1f;
+    public float fallTime = 2f;
+    public float fallSpeed = 1f;
 }
 
 public class Character
@@ -13,17 +17,49 @@ public class Character
     private CharacterView characterView = null;
     private bool isDoingAction = false;
     private bool isAlive = true;
+    private bool isPushing = false;
+    private bool isFalling = false;
+    private float pushTimer = 0f;
+    private float fallTimer = 0f;
+    private Vector2 forceDir = Vector2.zero;
 
     public Character( CharacterView characterView )
     {
         this.characterView = characterView;
     }
 
+    public void Tick()
+    {
+        if ( isPushing )
+        {
+            pushTimer += Time.deltaTime;
+            if ( pushTimer >= characterView.GetPushTime() )
+            {
+                isPushing = false;
+                characterView.ResetAnim();
+            }
+        }
+
+        if ( isFalling )
+        {
+            characterView.FallingTranslate( forceDir.x, forceDir.y );
+            fallTimer += Time.deltaTime;
+            if ( fallTimer >= characterView.GetFallTime() )
+            {
+                isFalling = false;
+                characterView.ResetAnim();
+            }
+        }
+    }
+
     public void Reset()
     {
         isDoingAction = false;
+        isPushing = false;
+        isFalling = false;
         isAlive = true;
-        characterView.Reset();
+        characterView.ResetPosition();
+        characterView.ResetAnim();
     }
 
     public Vector2 GetPosition()
@@ -35,14 +71,14 @@ public class Character
     {
         if ( isAlive )
         {
-            if ( isDoingAction == false )
+            if ( isDoingAction == false && isPushing == false && isFalling == false )
                 characterView.Translate( x, y );
         }
     }
 
     public void DoAction( bool active )
     {
-        if ( isAlive )
+        if ( isAlive && isPushing == false && isFalling == false )
         {
             isDoingAction = active;
             characterView.DoAction( active );
@@ -54,17 +90,46 @@ public class Character
         return isDoingAction;
     }
 
-    public void BePush()
+    public bool IsInPushRange( Vector2 otherPos )
     {
-        if ( isAlive )
-        {
+        if ( Vector2.Distance( GetPosition(), otherPos ) <= characterView.GetPushRange() )
+            return true;
+        else
+            return false;
+    }
 
+    public void Push()
+    {
+        if ( isAlive == true && isPushing == false && isFalling == false )
+        {
+            pushTimer = 0f;
+            isPushing = true;
+            characterView.PlayPushAnim();
+        }
+    }
+
+    public bool IsAvailableToPushOthers()
+    {
+        return isAlive == true && isPushing == false && isFalling == false;
+    }
+
+    public void BePush( Vector2 forceDir )
+    {
+        if ( isAlive == true && isFalling == false )
+        {
+            this.forceDir = forceDir;
+            fallTimer = 0f;
+            isFalling = true;
+            characterView.PlayFallAnim();
         }
     }
 
     public void Kill()
     {
         isAlive = false;
+        isDoingAction = false;
+        isPushing = false;
+        isFalling = false;
         characterView.PlayDieAnim();
     }
 }

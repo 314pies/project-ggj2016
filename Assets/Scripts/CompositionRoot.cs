@@ -25,12 +25,6 @@ public class CompositionRoot : MonoBehaviour
 
     private void Awake()
     {
-        // Player
-        CharacterView playerView = Instantiate( characterView );
-        playerView.Initialize( gameSetting.characterSetting );
-        Character player = new Character( playerView );
-        PlayerControl playerControl = new PlayerControl( player );
-
         // Master
         MasterView viewMaster = Instantiate( masterView );
         viewMaster.Initialize( gameSetting.masterSetting );
@@ -49,6 +43,12 @@ public class CompositionRoot : MonoBehaviour
             AIControlList.Add( aiControl );
             AICharacter.Add( character );
         }
+
+        // Player
+        CharacterView playerView = Instantiate( characterView );
+        playerView.Initialize( gameSetting.characterSetting );
+        Character player = new Character( playerView );
+        PlayerControl playerControl = new PlayerControl( player, AICharacter );
 
         gameManager = new GameManager( player, AICharacter, master );
         controllerManager = new ControllerManager( playerControl, AIControlList, masterControl );

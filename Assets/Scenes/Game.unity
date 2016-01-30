@@ -121,9 +121,17 @@ MonoBehaviour:
     characterSetting:
       moveSpeed: 2
       border: {x: 3, y: 2.5}
+      pushRange: .5
+      pushTime: 1
+      fallTime: 2
+      fallSpeed: 1
     masterSetting:
       moveSpeed: 2
       border: {x: 3, y: 2.5}
+      pushRange: .5
+      pushTime: 1
+      fallTime: 2
+      fallSpeed: 1
       rotateSpeed: 100
       circleRangeInTextureSize: 10
       rangeTextureSizeToUnitValue: .0799999982

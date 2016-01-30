@@ -27,11 +27,6 @@ public class Master
         return masterView.transform.localPosition;
     }
 
-    private float GetCircleRange()
-    {
-        return masterView.GetCircleRange();
-    }
-
     public bool IsInLightRange( Vector2 otherPos )
     {
         if ( lightState == LightState.CIRCLE )
@@ -44,7 +39,7 @@ public class Master
 
     private bool IsInCircleRange( Vector2 otherPos )
     {
-        if ( Vector2.Distance( GetPosition(), otherPos ) <= GetCircleRange() )
+        if ( Vector2.Distance( GetPosition(), otherPos ) <= masterView.GetCircleRange() )
             return true;
         else
             return false;
