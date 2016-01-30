@@ -4,7 +4,8 @@
 public class CharacterSetting
 {
     public float moveSpeed = 2f;
-    public Vector2 border = new Vector2( 3f, 2.5f );
+    public Vector2 borderMax = new Vector2( 9f, 2f );
+    public Vector2 borderMin = new Vector2( -9f, -4.3f );
     public float pushRange = 0.5f;
     public float pushTime = 1f;
     public float fallTime = 2f;
@@ -113,12 +114,13 @@ public class Character
         return isAlive == true && isPushing == false && isFalling == false;
     }
 
-    public void BePush( Vector2 forceDir )
+    public void Fall( Vector2 forceDir )
     {
         if ( isAlive == true && isFalling == false )
         {
             this.forceDir = forceDir;
             fallTimer = 0f;
+            isDoingAction = false;
             isFalling = true;
             characterView.PlayFallAnim();
         }

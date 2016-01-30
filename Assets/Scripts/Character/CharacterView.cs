@@ -27,8 +27,8 @@ public class CharacterView : MonoBehaviour
     public void ResetPosition()
     {
         m_transform.localPosition = new Vector2(
-            Random.Range( -characterSetting.border.x, characterSetting.border.x ),
-            Random.Range( -characterSetting.border.y, characterSetting.border.y ) );
+            Random.Range( characterSetting.borderMin.x, characterSetting.borderMax.x ),
+            Random.Range( characterSetting.borderMin.y, characterSetting.borderMax.y ) );
     }
 
     public void ResetAnim()
@@ -45,8 +45,8 @@ public class CharacterView : MonoBehaviour
         m_transform.Translate( speedDirection * Time.deltaTime );
 
         m_transform.localPosition = new Vector2(
-            Mathf.Clamp( transform.localPosition.x, -characterSetting.border.x, characterSetting.border.x ),
-            Mathf.Clamp( transform.localPosition.y, -characterSetting.border.y, characterSetting.border.y ) );
+            Mathf.Clamp( transform.localPosition.x, characterSetting.borderMin.x, characterSetting.borderMax.x ),
+            Mathf.Clamp( transform.localPosition.y, characterSetting.borderMin.y, characterSetting.borderMax.y ) );
     }
 
     public void FallingTranslate( float x, float y )
@@ -58,8 +58,8 @@ public class CharacterView : MonoBehaviour
         m_transform.Translate( speedDirection * Time.deltaTime );
 
         m_transform.localPosition = new Vector2(
-            Mathf.Clamp( transform.localPosition.x, -characterSetting.border.x, characterSetting.border.x ),
-            Mathf.Clamp( transform.localPosition.y, -characterSetting.border.y, characterSetting.border.y ) );
+            Mathf.Clamp( transform.localPosition.x, characterSetting.borderMin.x, characterSetting.borderMax.x ),
+            Mathf.Clamp( transform.localPosition.y, characterSetting.borderMin.y, characterSetting.borderMax.y ) );
     }
 
     public float GetPushRange()

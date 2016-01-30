@@ -28,7 +28,7 @@ public class PlayerControl
                     if ( character.IsInPushRange( AICharacter[ i ].GetPosition() ) )
                     {
                         Vector2 forceDir = ( AICharacter[ i ].GetPosition() - character.GetPosition() ).normalized;
-                        AICharacter[ i ].BePush( forceDir );
+                        AICharacter[ i ].Fall( forceDir );
                     }
                 }
             }

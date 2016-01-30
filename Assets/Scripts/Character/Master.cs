@@ -55,6 +55,11 @@ public class Master
         masterView.CircleMove();
     }
 
+    public void Move( float x, float y )
+    {
+        masterView.Translate( x, y );
+    }
+
     public void RandomMove()
     {
 

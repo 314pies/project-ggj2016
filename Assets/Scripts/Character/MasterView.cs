@@ -52,8 +52,8 @@ public class MasterView : MonoBehaviour
         m_transform.Translate( speedDirection * Time.deltaTime );
 
         m_transform.localPosition = new Vector2(
-            Mathf.Clamp( transform.localPosition.x, -masterSetting.border.x, masterSetting.border.x ),
-            Mathf.Clamp( transform.localPosition.y, -masterSetting.border.y, masterSetting.border.y ) );
+            Mathf.Clamp( transform.localPosition.x, masterSetting.borderMin.x, masterSetting.borderMax.x ),
+            Mathf.Clamp( transform.localPosition.y, masterSetting.borderMin.y, masterSetting.borderMax.y ) );
     }
 
 
