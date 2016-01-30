@@ -14,7 +14,7 @@ public class MasterSetting : CharacterSetting
 public class Master
 {
     enum LightState { CIRCLE, SPOTLIGHT, ALL }
-    private LightState lightState = LightState.SPOTLIGHT;
+    private LightState lightState = LightState.CIRCLE;
     private MasterView masterView;
 
     public Master( MasterView masterView )
@@ -39,7 +39,7 @@ public class Master
         else if ( lightState == LightState.SPOTLIGHT )
             return IsInSpotLightRange( otherPos );
         else
-            return false;
+            return true;
     }
 
     private bool IsInCircleRange( Vector2 otherPos )
