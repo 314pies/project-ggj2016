@@ -16,6 +16,7 @@ public class CharacterView : MonoBehaviour
     private static readonly int NORMAL_HASH = Animator.StringToHash( "Normal" );
     private static readonly int MOVE_HASH = Animator.StringToHash( "Move" );
     private static readonly int PUSH_HASH = Animator.StringToHash( "Push" );
+    private static readonly int FALL_HASH = Animator.StringToHash( "Fall" );
     private static readonly int DO_ACTION_HASH = Animator.StringToHash( "DoSpecificAction" );
 
     public void Initialize( CharacterSetting characterSetting )
@@ -39,8 +40,9 @@ public class CharacterView : MonoBehaviour
 
     public void ResetAnim()
     {
-        m_spriteRenderer.color = Color.white;
+        //m_spriteRenderer.color = Color.white;
         m_spriteRenderer.gameObject.SetActive( true );
+        animator.Play( NORMAL_HASH );
     }
 
     public void Translate( float x, float y )
@@ -129,7 +131,7 @@ public class CharacterView : MonoBehaviour
 
     public void PlayFallAnim()
     {
-        m_spriteRenderer.color = Color.green;
+        animator.Play( FALL_HASH );
     }
 
     public void PlayDieAnim()
