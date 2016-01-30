@@ -126,6 +126,7 @@ public class CharacterView : MonoBehaviour
     public void PlayDieAnim()
     {
         audioManager.PlaySound_CharDead();
+        audioManager.PlaySound_Explode();
 
         m_spriteRenderer.gameObject.SetActive( false );
         fireEffect.SetActive( true );

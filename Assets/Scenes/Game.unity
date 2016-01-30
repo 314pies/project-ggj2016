@@ -717,6 +717,10 @@ Prefab:
       propertyPath: IntroSoundEffect
       value: 
       objectReference: {fileID: 8300000, guid: 690b894b97c23452881a5d048e6b5605, type: 3}
+    - target: {fileID: 11408430, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
+      propertyPath: explodeClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 66dec85ac652e02468fe17c4353a2541, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1e13fb322700a84cb4bca851816114a, type: 2}
   m_IsPrefabParent: 0

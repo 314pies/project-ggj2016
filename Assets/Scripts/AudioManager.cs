@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip LoopSoundEffect;
     public AudioClip IntroSoundEffect;
+    public AudioClip explodeClip;
     void OnEnterGame()
     {
         StartCoroutine( PlayIntroAndLoop() );
@@ -34,5 +35,10 @@ public class AudioManager : MonoBehaviour
     {
         int Index = Random.Range( 0, DieSoundEffect.Length );
         audioSource.PlayOneShot( DieSoundEffect[ Index ], 1.0f );
+    }
+
+    public void PlaySound_Explode()
+    {
+        audioSource.PlayOneShot( explodeClip, 1.0f );
     }
 }
