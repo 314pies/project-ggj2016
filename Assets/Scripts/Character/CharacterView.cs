@@ -26,7 +26,6 @@ public class CharacterView : MonoBehaviour
         m_transform = transform;
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
-
         ResetPosition();
         ResetAnim();
     }
@@ -40,6 +39,7 @@ public class CharacterView : MonoBehaviour
 
     public void ResetAnim()
     {
+        m_spriteRenderer.color = Color.white;
         m_spriteRenderer.gameObject.SetActive( true );
     }
 

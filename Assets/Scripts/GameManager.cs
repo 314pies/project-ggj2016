@@ -30,23 +30,27 @@ public class GameManager
         {
             gameTime.Tick();
             controllerManager.Tick();
-            for ( int i = 0; i < aiCharacterList.Count; ++i )
+
+            if ( gameTime.GetTime() > 3f )
             {
-                if ( aiCharacterList[ i ].IsAlive() == true && master.IsInLightRange( aiCharacterList[ i ].GetPosition() ) == true )
+                for ( int i = 0; i < aiCharacterList.Count; ++i )
                 {
-                    if ( aiCharacterList[ i ].IsDoingAction() == false )
+                    if ( aiCharacterList[ i ].IsAlive() == true && master.IsInLightRange( aiCharacterList[ i ].GetPosition() ) == true )
                     {
-                        aiCharacterList[ i ].Kill();
-                        --remainAINumber;
+                        if ( aiCharacterList[ i ].IsDoingAction() == false )
+                        {
+                            aiCharacterList[ i ].Kill();
+                            --remainAINumber;
+                        }
                     }
                 }
-            }
 
-            if ( master.IsInLightRange( player.GetPosition() ) == true )
-            {
-                if ( player.IsDoingAction() == false )
+                if ( master.IsInLightRange( player.GetPosition() ) == true )
                 {
-                    player.Kill();
+                    if ( player.IsDoingAction() == false )
+                    {
+                        player.Kill();
+                    }
                 }
             }
 
