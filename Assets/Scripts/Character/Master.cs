@@ -59,4 +59,22 @@ public class Master
     {
 
     }
+
+    public void ChangeToCircleLight()
+    {
+        lightState = LightState.CIRCLE;
+        masterView.ChangeToCircleLight();
+    }
+
+    public void ChangeToSpotLight()
+    {
+        lightState = LightState.SPOTLIGHT;
+        masterView.ChangeToSpotLight();
+    }
+
+    public void ChangeToAllLightMode()
+    {
+        //lightState = LightState.ALL;
+        //masterView.ChangeToAllLightMode();
+    }
 }

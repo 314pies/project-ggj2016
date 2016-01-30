@@ -4,6 +4,9 @@ public class MasterView : MonoBehaviour
 {
     [SerializeField]
     private Transform circleLight = null;
+    [SerializeField]
+    private Transform spotlight = null;
+
     public float searchAngle = 15f;
     public float searchDistance = 2f;
 
@@ -105,5 +108,28 @@ public class MasterView : MonoBehaviour
         Debug.DrawLine( transform.position, pointL );
         Debug.DrawLine( pointR, pointF );
         Debug.DrawLine( pointL, pointF );
+    }
+
+    public void ChangeToCircleLight()
+    {
+        CloseAllLight();
+        circleLight.gameObject.SetActive( true );
+    }
+
+    public void ChangeToSpotLight()
+    {
+        CloseAllLight();
+        spotlight.gameObject.SetActive( true );
+    }
+
+    public void ChangeToAllLightMode()
+    {
+
+    }
+
+    private void CloseAllLight()
+    {
+        circleLight.gameObject.SetActive( false );
+        spotlight.gameObject.SetActive( false );
     }
 }

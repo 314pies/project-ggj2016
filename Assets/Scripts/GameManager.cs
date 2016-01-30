@@ -12,7 +12,7 @@ public class GameManager
     GameState gameState = GameState.Start;
     private int remainAINumber = 0;
 
-    public GameManager(ControllerManager controllerManager, Character player, List<Character> aiCharacterList, Master master)
+    public GameManager( ControllerManager controllerManager, Character player, List<Character> aiCharacterList, Master master )
     {
         this.controllerManager = controllerManager;
         this.player = player;
@@ -24,66 +24,74 @@ public class GameManager
 
     public void Tick()
     {
-        if (gameState == GameState.InGame)
+        if ( gameState == GameState.InGame )
         {
             controllerManager.Tick();
-            for (int i = 0; i < aiCharacterList.Count; ++i)
+            for ( int i = 0; i < aiCharacterList.Count; ++i )
             {
-                if (master.IsInLightRange(aiCharacterList[i].GetPosition()) == true)
+                if ( aiCharacterList[ i ].IsAlive() == true && master.IsInLightRange( aiCharacterList[ i ].GetPosition() ) == true )
                 {
-                    if (aiCharacterList[i].IsDoingAction() == false)
+                    if ( aiCharacterList[ i ].IsDoingAction() == false )
                     {
-                        aiCharacterList[i].Kill();
+                        aiCharacterList[ i ].Kill();
                         --remainAINumber;
                     }
                 }
             }
 
-            if (master.IsInLightRange(player.GetPosition()) == true)
+            if ( master.IsInLightRange( player.GetPosition() ) == true )
             {
-                if (player.IsDoingAction() == false)
+                if ( player.IsDoingAction() == false )
                 {
                     player.Kill();
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if ( Input.GetKeyDown( KeyCode.Alpha7 ) )
             {
-                ResetGame();
+                master.ChangeToCircleLight();
+            }
+            else if ( Input.GetKeyDown( KeyCode.Alpha8 ) )
+            {
+                master.ChangeToSpotLight();
+            }
+            else if ( Input.GetKeyDown( KeyCode.Alpha9 ) )
+            {
+                master.ChangeToAllLightMode();
             }
 
-            if (player.IsAlive() == false)
+            if ( player.IsAlive() == false )
             {
                 gameState = GameState.Fail;
-                EventManager.TriggerEvent("OnEnterFailState");
+                EventManager.TriggerEvent( "OnEnterFailState" );
             }
-            else if (remainAINumber == 0)
+            else if ( remainAINumber == 0 )
             {
                 gameState = GameState.Success;
-                EventManager.TriggerEvent("OnEnterSuccessState");
+                EventManager.TriggerEvent( "OnEnterSuccessState" );
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.Return) && gameState == GameState.Start)
+        else if ( Input.GetKeyDown( KeyCode.Return ) && gameState == GameState.Start )
         {
             StartTheGame();
         }
-        else if(gameState == GameState.Fail)
+        else if ( gameState == GameState.Fail )
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if ( Input.GetKeyDown( KeyCode.Return ) )
             {
                 ResetGame();
                 gameState = GameState.InGame;
-                EventManager.TriggerEvent("OnEnterGameState");
+                EventManager.TriggerEvent( "OnEnterGameState" );
             }
         }
-        else if (gameState == GameState.Success)
+        else if ( gameState == GameState.Success )
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if ( Input.GetKeyDown( KeyCode.Return ) )
             {
                 ResetGame();
                 gameState = GameState.InGame;
-                EventManager.TriggerEvent("OnEnterGameState");
+                EventManager.TriggerEvent( "OnEnterGameState" );
             }
         }
     }
@@ -91,14 +99,14 @@ public class GameManager
     void StartTheGame()
     {
         gameState = GameState.InGame;
-        EventManager.TriggerEvent("OnEnterGameState");
+        EventManager.TriggerEvent( "OnEnterGameState" );
     }
 
     private void ResetGame()
     {
-        for (int i = 0; i < aiCharacterList.Count; ++i)
+        for ( int i = 0; i < aiCharacterList.Count; ++i )
         {
-            aiCharacterList[i].Reset();
+            aiCharacterList[ i ].Reset();
         }
         player.Reset();
 

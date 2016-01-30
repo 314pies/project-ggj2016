@@ -185,27 +185,27 @@ MonoBehaviour:
       controlChangingTime: .5
       actionDelayRelease: .150000006
     characterSetting:
-      moveSpeed: 2
-      border: {x: 3, y: 2.5}
-      pushRange: .5
+      moveSpeed: 3
+      border: {x: 8.5, y: 4}
+      pushRange: 1.5
       pushTime: 1
       fallTime: 2
       fallSpeed: 1
     masterSetting:
       moveSpeed: 2
-      border: {x: 3, y: 2.5}
+      border: {x: 8.5, y: 4}
       pushRange: .5
       pushTime: 1
       fallTime: 2
       fallSpeed: 1
       rotateSpeed: 100
-      circleRangeInTextureSize: 10
-      rangeTextureSizeToUnitValue: .0799999982
+      circleRangeInTextureSize: 1
+      rangeTextureSizeToUnitValue: 3.20000005
       searchAngle: 30
-      searchDistance: 2
+      searchDistance: 3.4000001
   masterView: {fileID: 11424722, guid: 68e260981d57547df9095c3944fa736d, type: 2}
-  characterView: {fileID: 11436440, guid: ff6841550a50b49f5b3f3e084d2de59d, type: 2}
-  AINumber: 1
+  characterPrefab: {fileID: 11436440, guid: ff6841550a50b49f5b3f3e084d2de59d, type: 2}
+  AINumber: 10
 --- !u!4 &345038355
 Transform:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

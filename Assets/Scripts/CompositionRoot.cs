@@ -16,7 +16,7 @@ public class CompositionRoot : MonoBehaviour
     [SerializeField]
     private MasterView masterView = null;
     [SerializeField]
-    private CharacterView characterView = null;
+    private CharacterView characterPrefab = null;
     [SerializeField]
     private int AINumber = 30;
 
@@ -36,7 +36,7 @@ public class CompositionRoot : MonoBehaviour
         List<Character> AICharacter = new List<Character>();
         for ( int i = 0; i < AINumber; ++i )
         {
-            CharacterView view = Instantiate( characterView );
+            CharacterView view = Instantiate( characterPrefab );
             view.Initialize( gameSetting.characterSetting );
             Character character = new Character( view );
             AIControl aiControl = new AIControl( gameSetting.AIControlSetting, character, master );
@@ -45,7 +45,7 @@ public class CompositionRoot : MonoBehaviour
         }
 
         // Player
-        CharacterView playerView = Instantiate( characterView );
+        CharacterView playerView = Instantiate( characterPrefab );
         playerView.Initialize( gameSetting.characterSetting );
         Character player = new Character( playerView );
         PlayerControl playerControl = new PlayerControl( player, AICharacter );

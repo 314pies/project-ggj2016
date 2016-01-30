@@ -4,13 +4,18 @@ public class CharacterView : MonoBehaviour
 {
     private CharacterSetting characterSetting = null;
     private SpriteRenderer m_spriteRenderer;
+    private Animator animator = null;
     private Transform m_transform;
     AudioManager audioManager;
+
+    private static readonly int NORMAL_HASH = Animator.StringToHash( "Normal" );
+    private static readonly int DO_ACTION_HASH = Animator.StringToHash( "DoSpecificAction" );
 
     public void Initialize( CharacterSetting characterSetting )
     {
         this.characterSetting = characterSetting;
-        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         m_transform = transform;
         audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
@@ -74,7 +79,14 @@ public class CharacterView : MonoBehaviour
 
     public void DoAction( bool active )
     {
-        m_spriteRenderer.color = active ? Color.black : Color.white;
+        if ( active )
+        {
+            animator.Play( DO_ACTION_HASH );
+        }
+        else
+        {
+            animator.Play( NORMAL_HASH );
+        }
     }
 
     public void PlayPushAnim()
