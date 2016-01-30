@@ -132,4 +132,9 @@ public class Character
         isFalling = false;
         characterView.PlayDieAnim();
     }
+
+    public bool IsAlive()
+    {
+        return isAlive;
+    }
 }

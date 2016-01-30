@@ -50,13 +50,14 @@ public class CompositionRoot : MonoBehaviour
         Character player = new Character( playerView );
         PlayerControl playerControl = new PlayerControl( player, AICharacter );
 
-        gameManager = new GameManager( player, AICharacter, master );
-        controllerManager = new ControllerManager( playerControl, AIControlList, masterControl );
+        controllerManager = new ControllerManager(playerControl, AIControlList, masterControl);
+        gameManager = new GameManager(controllerManager, player, AICharacter, master );
+        
     }
 
     private void Update()
     {
-        controllerManager.Tick();
+        //controllerManager.Tick();
         gameManager.Tick();
     }
 }
