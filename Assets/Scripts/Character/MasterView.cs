@@ -54,6 +54,14 @@ public class MasterView : MonoBehaviour
         m_transform.localPosition = new Vector2(
             Mathf.Clamp( transform.localPosition.x, masterSetting.borderMin.x, masterSetting.borderMax.x ),
             Mathf.Clamp( transform.localPosition.y, masterSetting.borderMin.y, masterSetting.borderMax.y ) );
+
+        m_transform.localPosition = new Vector3( transform.localPosition.x,
+           transform.localPosition.y, transform.localPosition.y - masterSetting.borderMax.y );
+
+        if ( x < 0f )
+            m_transform.localScale = new Vector3( -1f, 1f, 1f );
+        else if ( x > 0f )
+            m_transform.localScale = Vector3.one;
     }
 
 

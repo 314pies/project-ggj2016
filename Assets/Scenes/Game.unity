@@ -375,9 +375,9 @@ MonoBehaviour:
       borderMax: {x: 9, y: 2}
       borderMin: {x: -9, y: -4.30000019}
       pushRange: 1.5
-      pushTime: 1
+      pushTime: .5
       fallTime: 2
-      fallSpeed: 2
+      fallSpeed: 5
     masterSetting:
       moveSpeed: 2
       borderMax: {x: 9, y: 2}

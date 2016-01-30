@@ -47,6 +47,14 @@ public class CharacterView : MonoBehaviour
         m_transform.localPosition = new Vector2(
             Mathf.Clamp( transform.localPosition.x, characterSetting.borderMin.x, characterSetting.borderMax.x ),
             Mathf.Clamp( transform.localPosition.y, characterSetting.borderMin.y, characterSetting.borderMax.y ) );
+
+        m_transform.localPosition = new Vector3( transform.localPosition.x,
+            transform.localPosition.y, transform.localPosition.y - characterSetting.borderMax.y );
+
+        if ( x < 0f )
+            m_transform.localScale = new Vector3( -1f, 1f, 1f );
+        else if ( x > 0f )
+            m_transform.localScale = Vector3.one;
     }
 
     public void FallingTranslate( float x, float y )
@@ -60,6 +68,9 @@ public class CharacterView : MonoBehaviour
         m_transform.localPosition = new Vector2(
             Mathf.Clamp( transform.localPosition.x, characterSetting.borderMin.x, characterSetting.borderMax.x ),
             Mathf.Clamp( transform.localPosition.y, characterSetting.borderMin.y, characterSetting.borderMax.y ) );
+
+        m_transform.localPosition = new Vector3( transform.localPosition.x,
+            transform.localPosition.y, transform.localPosition.y - characterSetting.borderMax.y );
     }
 
     public float GetPushRange()
