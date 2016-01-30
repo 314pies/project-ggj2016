@@ -62,6 +62,13 @@ public class CharacterView : MonoBehaviour
             m_transform.localScale = new Vector3( -1f, 1f, 1f );
         else if ( x > 0f )
             m_transform.localScale = Vector3.one;
+
+        //if ( x != 0f || y != 0f )
+        //    animator.Play( MOVE_HASH );
+        if ( x != 0f || y != 0f )
+            animator.SetBool( "IsMoving", true );
+        else
+            animator.SetBool( "IsMoving", false );
     }
 
     public void FallingTranslate( float x, float y )
@@ -106,10 +113,12 @@ public class CharacterView : MonoBehaviour
         if ( active )
         {
             animator.Play( DO_ACTION_HASH );
+            animator.SetBool( "IsAction", true );
         }
         else
         {
-            animator.Play( NORMAL_HASH );
+            //animator.Play( NORMAL_HASH );
+            animator.SetBool( "IsAction", false );
         }
     }
 

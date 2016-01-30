@@ -51,8 +51,6 @@ public class Character
                 characterView.ResetAnim();
             }
         }
-
-        
     }
 
     public void Reset()
@@ -76,12 +74,14 @@ public class Character
         {
             if ( isDoingAction == false && isPushing == false && isFalling == false )
                 characterView.Translate( x, y );
+            else
+                characterView.Translate( 0f, 0f );
         }
     }
 
     public void DoAction( bool active )
     {
-        if ( isAlive && isPushing == false && isFalling == false )
+        if ( isAlive && isPushing == false && isFalling == false && active != isDoingAction )
         {
             isDoingAction = active;
             characterView.DoAction( active );
