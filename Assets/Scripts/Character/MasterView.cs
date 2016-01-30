@@ -64,6 +64,16 @@ public class MasterView : MonoBehaviour
             m_transform.localScale = Vector3.one;
     }
 
+    public bool IsInXXXRange( Vector2 other )
+    {
+        if ( ( other.x - transform.localPosition.x ) * ( other.x - transform.localPosition.x ) / 9
+            + ( other.y - transform.localPosition.y ) * ( other.y - transform.localPosition.y ) / 4.84
+            <= 1 )
+            return true;
+        else
+            return false;
+    }
+
 
     public bool IsInSpotLightRange( Vector3 other )
     {

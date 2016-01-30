@@ -73,7 +73,6 @@ public class GameManager
                 gameState = GameState.Success;
                 EventManager.TriggerEvent( EventDictionary.ON_ENTER_SUCCESS_STATE );
             }
-
         }
         else if ( Input.GetKeyDown( KeyCode.Return ) && gameState == GameState.Start )
         {

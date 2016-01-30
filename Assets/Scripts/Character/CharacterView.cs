@@ -8,7 +8,13 @@ public class CharacterView : MonoBehaviour
     private Transform m_transform;
     AudioManager audioManager;
 
+    [SerializeField]
+    private GameObject fireEffect = null;
+    [SerializeField]
+    private GameObject groundEffect = null;
+
     private static readonly int NORMAL_HASH = Animator.StringToHash( "Normal" );
+    private static readonly int MOVE_HASH = Animator.StringToHash( "Move" );
     private static readonly int DO_ACTION_HASH = Animator.StringToHash( "DoSpecificAction" );
 
     public void Initialize( CharacterSetting characterSetting )
@@ -33,7 +39,7 @@ public class CharacterView : MonoBehaviour
 
     public void ResetAnim()
     {
-        m_spriteRenderer.color = Color.white;
+        m_spriteRenderer.gameObject.SetActive( true );
     }
 
     public void Translate( float x, float y )
@@ -71,6 +77,12 @@ public class CharacterView : MonoBehaviour
 
         m_transform.localPosition = new Vector3( transform.localPosition.x,
             transform.localPosition.y, transform.localPosition.y - characterSetting.borderMax.y );
+    }
+
+    public void UpdateAnimator()
+    {
+
+
     }
 
     public float GetPushRange()
@@ -113,6 +125,17 @@ public class CharacterView : MonoBehaviour
     public void PlayDieAnim()
     {
         audioManager.PlaySound_CharDead();
-        m_spriteRenderer.color = Color.blue;
+
+        m_spriteRenderer.gameObject.SetActive( false );
+        fireEffect.SetActive( true );
+        groundEffect.SetActive( true );
+
+        Invoke( "HideEffect", 1.0f );
+    }
+
+    private void HideEffect()
+    {
+        fireEffect.SetActive( false );
+        groundEffect.SetActive( false );
     }
 }

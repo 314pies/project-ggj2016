@@ -51,6 +51,8 @@ public class Character
                 characterView.ResetAnim();
             }
         }
+
+        
     }
 
     public void Reset()

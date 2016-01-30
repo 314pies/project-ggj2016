@@ -39,10 +39,11 @@ public class Master
 
     private bool IsInCircleRange( Vector2 otherPos )
     {
-        if ( Vector2.Distance( GetPosition(), otherPos ) <= masterView.GetCircleRange() )
-            return true;
-        else
-            return false;
+        return masterView.IsInXXXRange( otherPos );
+        //if ( Vector2.Distance( GetPosition(), otherPos ) <= masterView.GetCircleRange() )
+        //    return true;
+        //else
+        //    return false;
     }
 
     private bool IsInSpotLightRange( Vector2 otherPos )
