@@ -314,7 +314,7 @@ MonoBehaviour:
       fallSpeed: 5
     masterSetting:
       moveSpeed: 2
-      borderMax: {x: 9, y: 2}
+      borderMax: {x: 8, y: .600000024}
       borderMin: {x: -9, y: -4.30000019}
       pushRange: .5
       pushTime: 1
