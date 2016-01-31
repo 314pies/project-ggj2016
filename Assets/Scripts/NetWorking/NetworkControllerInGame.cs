@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class NetworkControllerInGame : MonoBehaviour
 {
@@ -79,6 +80,7 @@ public class NetworkControllerInGame : MonoBehaviour
     public void KillAnPlayer(int RPIndex)
     {
         nView.RPC("KillAnPlayerRemote", RPCMode.Others, RPIndex);
+        BroadCastMessage(MpLobby.Names[RPIndex]+ " Was Sacrificed");
     }
 
 
@@ -90,6 +92,28 @@ public class NetworkControllerInGame : MonoBehaviour
     //public void Syncro
     //Create myself remote
 
+   public void Resetted()
+    {
+        nView.RPC("RmoteResetAllStatus", RPCMode.All);
+
+    }
+    public void BroadCastMessage(string Message)
+    {
+        nView.RPC("GotRemoteMEssage", RPCMode.All,Message);
+    }
+    public Text Board;
+
+    [RPC]
+    void GotRemoteMEssage(string Msg)
+    {
+        Board.text = Msg;
+
+    }
+   [RPC]
+    void RmoteResetAllStatus()
+    {
+        gameManager.RemoteRestted();
+    }
 
 
     [RPC]
@@ -122,6 +146,7 @@ public class NetworkControllerInGame : MonoBehaviour
         {
             AllAI[ObjIndex].transform.position = NewPos;
             AllAI[ObjIndex].transform.localScale = NewScale;
+          //  AllAICha[ObjIndex].Move(0.000001f, 0.000001f);//To play Animation
         }
         else
         {
@@ -137,6 +162,7 @@ public class NetworkControllerInGame : MonoBehaviour
             OtherPlayersRemote[ObjIndex].transform.position = NewPos;
             OtherPlayersRemote[ObjIndex].transform.localScale = NewScale;
             OtherPlayersCha[ObjIndex].DoAction(IsAction);
+            //OtherPlayersCha[ObjIndex].Move(0.000001f, 0.000001f);//To play Animation
         }
     }
 

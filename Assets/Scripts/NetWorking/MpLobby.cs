@@ -17,9 +17,11 @@ public class MpLobby : MonoBehaviour {
     }
 
     public InputField IpInput;
+    bool Lock=false;
     public void ConnectToServer()
-    {
-        Network.Connect(IpInput.text, 25001);
+    {   if(!Lock)
+            Network.Connect(IpInput.text, 25001);
+        Lock = true;
     }
 
     public GameObject StartMPGameButton;
@@ -32,6 +34,7 @@ public class MpLobby : MonoBehaviour {
         IsServer = true;
         ShowIP.gameObject.SetActive(true);
         ShowIP.text = "IP: " + Network.player.ipAddress;
+        Names[0] = NameINput.text;
     }
 
     static public int PlayerCount=1;
@@ -43,13 +46,28 @@ public class MpLobby : MonoBehaviour {
         PlayerCount++;
         nView.RPC("SynPlayersNum", RPCMode.All, PlayerCount);
     }
-
+    public InputField NameINput;
     public void StartTheGame()
     {
         if(Network.isServer)
           nView.RPC("StartMpGame", RPCMode.All);
     }
     /*Alll Remore Produce called function*/
+
+    
+    void UploadNameToServer(int Index)
+    {
+        nView.RPC("UploadName", RPCMode.Server, NameINput.text, Index);
+
+    }
+    static public string[] Names = new string[5];
+    [RPC]
+    void UploadName(string Name, int Index)
+    {
+        Names[Index] = Name;
+        Debug.Log("Name : " + Name);
+    }
+
     public Text ShowPlayNum;
     [RPC]
     void SynPlayersNum(int NewPlayerNum)
@@ -63,6 +81,7 @@ public class MpLobby : MonoBehaviour {
     {
         MyIndex = Index;
         IsServer = false;//Marked, may have bug
+        UploadNameToServer(Index);
     }
     [RPC]
     void StartMpGame()

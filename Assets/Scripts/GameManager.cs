@@ -123,6 +123,7 @@ public class GameManager
                 EventManager.TriggerEvent(EventDictionary.ON_ENTER_SUCCESS_STATE);
             }
 
+            
             /**/
             //if ( player.IsAlive() == false )
             //{
@@ -141,30 +142,51 @@ public class GameManager
             //	EventManager.TriggerEvent( EventDictionary.ON_ENTER_SUCCESS_STATE );
             //}
         }
-        else if ( Input.GetKeyDown( KeyCode.Return ) && gameState == GameState.Start && MpLobby.IsServer)
-		{
-			// StartTheGame();
-			NetworkController.AllStartTheGame();
-			IsServerRunning = true;
-		}
-		else if ( gameState == GameState.Fail )
-		{
-			if ( Input.GetKeyDown( KeyCode.Return ) && !IsServerRunning)
-			{
-				ResetGame();
-				gameState = GameState.InGame;
-				EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
-			}
-		}
-		else if ( gameState == GameState.Success && !IsServerRunning)
-		{
-			if ( Input.GetKeyDown( KeyCode.Return ) )
-			{
-				ResetGame();
-				gameState = GameState.InGame;
-				EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
-			}
-		}
+
+        if (gameState == GameState.Success || gameState == GameState.Fail)
+        {
+            if (MpLobby.IsServer)
+            {
+                if (Input.GetKeyDown(KeyCode.Return))
+                {
+                    //RemoteRestted();
+                    NetworkController.Resetted();
+                }
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.Return) && gameState == GameState.Start && MpLobby.IsServer)
+        {
+            // StartTheGame();
+            NetworkController.AllStartTheGame();
+            IsServerRunning = true;
+        }
+        //else if ( gameState == GameState.Fail )
+        //{
+        //	if ( Input.GetKeyDown( KeyCode.Return ) && !IsServerRunning)
+        //	{
+        //		ResetGame();
+        //		gameState = GameState.InGame;
+        //		EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
+        //	}
+        //}
+        //else if ( gameState == GameState.Success && !IsServerRunning)
+        //{
+        //	if ( Input.GetKeyDown( KeyCode.Return ) )
+        //	{
+        //		ResetGame();
+        //		gameState = GameState.InGame;
+        //		EventManager.TriggerEvent( EventDictionary.ON_ENTER_GAME_STATE );
+        //	}
+        //}
+    }
+
+    public void RemoteRestted()
+    {
+        ResetGame();
+        gameState = GameState.InGame;
+        EventManager.TriggerEvent(EventDictionary.ON_ENTER_GAME_STATE);
+
+
     }
 
     public void StartTheGame()
