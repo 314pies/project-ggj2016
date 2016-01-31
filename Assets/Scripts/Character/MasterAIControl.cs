@@ -28,7 +28,7 @@ public class MasterAIControl
             controlDirection = new Vector2( Random.Range( -1f, 1f ), Random.Range( -1f, 1f ) );
             timer = 0f;
         }
-
-        character.Move( controlDirection.x, controlDirection.y );
+        if (MpLobby.IsServer)
+            character.Move( controlDirection.x, controlDirection.y );
     }
 }

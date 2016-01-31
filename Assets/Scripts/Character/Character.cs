@@ -14,6 +14,12 @@ public class CharacterSetting
 
 public class Character
 {
+	/*Need for Network*/
+	public NetworkControllerInGame InGameNetManager;
+	public int NetWorkingId=-1;
+	public bool IsRemotePlayer=false;//Not AI, is Player
+	/*Need for Network*/
+
     public Vector2 Position = Vector2.zero;
     private CharacterView characterView = null;
     private bool isDoingAction = false;

@@ -40,9 +40,9 @@ public class CharacterView : MonoBehaviour
 
     public void ResetAnim()
     {
-        //m_spriteRenderer.color = Color.white;
+        m_spriteRenderer.color = Color.white;
         m_spriteRenderer.gameObject.SetActive( true );
-        animator.Play( NORMAL_HASH );
+        animator.Play(NORMAL_HASH);
     }
 
     public void Translate( float x, float y )
@@ -65,8 +65,6 @@ public class CharacterView : MonoBehaviour
         else if ( x > 0f )
             m_transform.localScale = Vector3.one;
 
-        //if ( x != 0f || y != 0f )
-        //    animator.Play( MOVE_HASH );
         if ( x != 0f || y != 0f )
             animator.SetBool( "IsMoving", true );
         else
@@ -114,24 +112,22 @@ public class CharacterView : MonoBehaviour
     {
         if ( active )
         {
-            animator.Play( DO_ACTION_HASH );
             animator.SetBool( "IsAction", true );
         }
         else
         {
-            //animator.Play( NORMAL_HASH );
             animator.SetBool( "IsAction", false );
         }
     }
 
     public void PlayPushAnim()
     {
-        animator.Play( PUSH_HASH );
+        animator.Play(PUSH_HASH);
     }
 
     public void PlayFallAnim()
     {
-        animator.Play( FALL_HASH );
+        animator.Play(FALL_HASH);
     }
 
     public void PlayDieAnim()

@@ -6,8 +6,8 @@ AnimationClip:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Fire
-  serializedVersion: 6
-  m_Legacy: 0
+  serializedVersion: 4
+  m_AnimationType: 2
   m_Compressed: 0
   m_UseHighQualityCurve: 1
   m_RotationCurves: []
@@ -79,40 +79,8 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
-    genericBindings:
-    - path: 0
-      attribute: 0
-      script: {fileID: 0}
-      classID: 212
-      customType: 23
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 21300000, guid: 1f377840006a7004f8fefe8c09ce0fff, type: 3}
-    - {fileID: 21300000, guid: 8e7a72c812a3f104c985232c698b31b3, type: 3}
-    - {fileID: 21300000, guid: 513688c0966261f4687c218c7e92fb43, type: 3}
-    - {fileID: 21300000, guid: 5e2bca05d57899441a19264efd418e58, type: 3}
-    - {fileID: 21300000, guid: 39efa0d86fb0b6d4c801f28c527f76d7, type: 3}
-    - {fileID: 21300000, guid: 0fa345b27b72cb54791bf7169911f3a4, type: 3}
-    - {fileID: 21300000, guid: 1b2037f6c08747c4d86ef3aca360020a, type: 3}
-    - {fileID: 21300000, guid: 91df4707150293548a3b9400b4f7ead7, type: 3}
-    - {fileID: 21300000, guid: 945b7d0868df8e847b22879acb80bc6b, type: 3}
-    - {fileID: 21300000, guid: 477ba233bb88d43498fa672608d71894, type: 3}
-    - {fileID: 21300000, guid: 2b0ac7c5a89a33e4f9535744e7c3dabf, type: 3}
-    - {fileID: 21300000, guid: f1943d3ed228a6d4695af038caee18e9, type: 3}
-    - {fileID: 21300000, guid: c0e19a28321ad7144b18aacb7eb1342f, type: 3}
-    - {fileID: 21300000, guid: b05df5422979d1646a0cb1010e2d9451, type: 3}
-    - {fileID: 21300000, guid: f3e6bf17d503c2446a4003fefafbb397, type: 3}
-    - {fileID: 21300000, guid: dfd591b664abe814ebcf9992a0f2cd50, type: 3}
-    - {fileID: 21300000, guid: c8e231d2271949d4b918b30e05a4a44b, type: 3}
-    - {fileID: 21300000, guid: c778f5389e55d8e458c8669bc689ec4a, type: 3}
-    - {fileID: 21300000, guid: a4a59d9d022c3374d8dfb89b79f14d02, type: 3}
-    - {fileID: 21300000, guid: bfe15e1532405014d952f71846fa9b24, type: 3}
-    - {fileID: 21300000, guid: cf0469f76df11644b8ad02071297cd68, type: 3}
-    - {fileID: 21300000, guid: 4dd2c5e18df356c4085037a60c32a90b, type: 3}
-    - {fileID: 21300000, guid: 6dd7200a6ceb99046a3beb68c681f573, type: 3}
-    - {fileID: 21300000, guid: e8f25300cda57c74582509a6d4b8d238, type: 3}
-    - {fileID: 21300000, guid: d60f80b3876e9a2468ae6b1b4f42d16a, type: 3}
-    - {fileID: 21300000, guid: e3be50045e7f2e744b740fdc2775fc96, type: 3}
+    genericBindings: []
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
@@ -132,7 +100,4 @@ AnimationClip:
     m_Mirror: 0
   m_EditorCurves: []
   m_EulerEditorCurves: []
-  m_HasGenericRootTransform: 0
-  m_HasMotionFloatCurves: 0
-  m_GenerateMotionCurves: 0
   m_Events: []
