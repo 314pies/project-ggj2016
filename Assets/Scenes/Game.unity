@@ -336,77 +336,77 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - time: 0
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 1.72617252e+25
       outSlope: 3.03381637e+32
       tangentMode: 0
     - time: .100000001
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: .200000003
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: .400000006
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: .800000012
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 1.60000002
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 3.20000005
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 6.4000001
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 12.8000002
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 25.6000004
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 51.2000008
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 102.400002
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 204.800003
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 409.600006
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - time: 500
-      value: 3.75433082e-39
+      value: 3.74296349e-39
       inSlope: 1.72617252e+25
       outSlope: 3.03381637e+32
       tangentMode: 0
@@ -486,7 +486,7 @@ MonoBehaviour:
       searchDistance: 3.4000001
   masterView: {fileID: 11424722, guid: 68e260981d57547df9095c3944fa736d, type: 2}
   characterPrefab: {fileID: 11436440, guid: ff6841550a50b49f5b3f3e084d2de59d, type: 2}
-  AINumber: 10
+  AINumber: 20
   successPanel: {fileID: 1182928881}
   NetObj: {fileID: 1188451182}
 --- !u!4 &345038355
@@ -859,8 +859,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   compositionroot: {fileID: 345038354}
+  SyncornizeRate_MainChar: .0599999987
+  SyncornizeRate_AI: 1.5
   Master: {fileID: 0}
   AllAI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -922,6 +944,26 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   OtherPlayersRemote:
   - {fileID: 0}
   - {fileID: 0}
@@ -936,6 +978,7 @@ MonoBehaviour:
   - {fileID: 0}
   LocalPlayer: {fileID: 0}
   LocalPlayerChaV: {fileID: 0}
+  IsLockPlayers: 0000000000
   Board: {fileID: 1861203161}
 --- !u!148 &1188451183
 NetworkView:

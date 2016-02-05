@@ -54,7 +54,10 @@ public class CompositionRoot : MonoBehaviour
 			NetObj.AllAICha[i]=character;
 			
 			AIControl aiControl = new AIControl( gameSetting.AIControlSetting, character, master );
-			AIControlList.Add( aiControl );
+            aiControl.InGameNetManager = NetObj;
+            aiControl.NetworkId = i;
+            NetObj.AllAICon[i] = aiControl;
+            AIControlList.Add( aiControl );
 			AICharacter.Add( character );
 			//NetObj.AllAI[i].SetActive(false);//tagged
 		}

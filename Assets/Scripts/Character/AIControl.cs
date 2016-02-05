@@ -17,7 +17,12 @@ public class AIControl
     private float actionTimer = 0f;
     private Vector2 controlDirection = Vector2.zero;
 
-    public AIControl( AIControlSetting aiControlSetting, Character character, Master master )
+    /*For Networking*/
+    public int NetworkId;
+    public NetworkControllerInGame InGameNetManager = null;
+
+    /**/
+    public AIControl(AIControlSetting aiControlSetting, Character character, Master master)
     {
         this.aiControlSetting = aiControlSetting;
         this.character = character;
@@ -34,32 +39,44 @@ public class AIControl
     private void UpdateMoveDecision()
     {
         timer += Time.deltaTime;
-        if ( timer >= aiControlSetting.controlChangingTime )
+        if (timer >= aiControlSetting.controlChangingTime)
         {
-            controlDirection = new Vector2( Random.Range( -1f, 1f ), Random.Range( -1f, 1f ) );
+            Vector2 controlDirectionTemp = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
             timer = 0f;
+            if (MpLobby.IsServer)
+            {
+                InGameNetManager.SendMoveDir(controlDirectionTemp.x, controlDirectionTemp.y, NetworkId);
+                //
+            }
         }
-        if (MpLobby.IsServer)
-            character.Move( controlDirection.x, controlDirection.y );
+        character.Move(controlDirection.x, controlDirection.y);
+    }
+
+    public void UpdateMoveDecision_Remote(float Dirx, float DirY)
+    {
+        controlDirection.x = Dirx;
+        controlDirection.y = DirY;
+
+        //  character.Move(Dirx, DirY);
     }
 
     private void UpdateActionDecision()
     {
-        if ( master.IsInLightRange( character.GetPosition() ) == true )
+        if (master.IsInLightRange(character.GetPosition()) == true)
         {
             actionTimer = 0f;
-            character.DoAction( true );
+            character.DoAction(true);
         }
         else
         {
-            if ( actionTimer < aiControlSetting.actionDelayRelease )
+            if (actionTimer < aiControlSetting.actionDelayRelease)
             {
                 actionTimer += Time.deltaTime;
             }
 
-            if ( actionTimer >= aiControlSetting.actionDelayRelease )
+            if (actionTimer >= aiControlSetting.actionDelayRelease)
             {
-                character.DoAction( false );
+                character.DoAction(false);
             }
         }
     }

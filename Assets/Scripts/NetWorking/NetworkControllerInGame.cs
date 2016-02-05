@@ -8,17 +8,22 @@ public class NetworkControllerInGame : MonoBehaviour
     static public bool LockLocalMovement;
 
     NetworkView nView;
+
+    public float SyncornizeRate_MainChar = 0.06f;
+    public float SyncornizeRate_AI = 1.5f;
     void Awake()
     {
         nView = GetComponent<NetworkView>();
-        InvokeRepeating("SyncronizeData", 1.0f, SyncornizeRate);
+        InvokeRepeating("SyncronizeMainCharData", 1.0f, SyncornizeRate_MainChar);
+        InvokeRepeating("SyncronizeAIPos", 0.0f, SyncornizeRate_AI);
+
     }
     public GameObject Master;
 
-    public GameObject[] AllAI = new GameObject[30];
-    public CharacterView[] AllAIChaV = new CharacterView[30];
-    public Character[] AllAICha = new Character[30];
-
+    public GameObject[] AllAI = new GameObject[50];
+    public CharacterView[] AllAIChaV = new CharacterView[50];
+    public Character[] AllAICha = new Character[50];
+    public AIControl[] AllAICon = new AIControl[50];
 
     public GameObject[] OtherPlayersRemote = new GameObject[5];
     public CharacterView[] OtherPlayersAIChaV = new CharacterView[5];
@@ -29,61 +34,66 @@ public class NetworkControllerInGame : MonoBehaviour
     public Character LocalPlayerCha;
 
     int LastAIIndex = 0;
-    public Character[] CharactersController = new Character[30];
+    public Character[] CharactersController = new Character[50];
 
     public GameManager gameManager;
 
     // Update is called once per frame
 
-    public float SyncornizeRate = 0.06f;
+
+
     Vector3 MasterLastPos = Vector3.zero;
     Vector3 MasterVelocity = Vector3.zero;
 
-    Vector3[] AIsLastPos = new Vector3[30];
-    Vector3[] AIVelocity = new Vector3[30];
+    Vector3[] AIsLastPos = new Vector3[50];
+    Vector3[] AIVelocity = new Vector3[50];
 
     Vector3[] RPLastPos = new Vector3[5];
     Vector3[] RPVelocity = new Vector3[5];
 
 
     public bool[] IsLockPlayers = new bool[5];
-    void SyncronizeData()
+    void SyncronizeMainCharData()
     {
         print("Dogg");
         if (Network.isServer)
         {
-            for (int i = 0; i < 30; i++)
-            {
-                if (AllAI[i] != null)
-                    nView.RPC("UpdateAITrans", RPCMode.Others, i, AllAI[i].transform.position, AllAI[i].transform.localScale);
-            }
-            //  UpdateMasterTrans(Master.transform.position, Master.transform.localScale);
             nView.RPC("UpdateMasterTrans", RPCMode.Others, Master.transform.position, Master.transform.localScale);
         }
-
+        nView.RPC("UpdateRtPlayerTrans", RPCMode.Others, MpLobby.MyIndex, LocalPlayer.transform.position, LocalPlayer.transform.localScale, LocalPlayerCha.IsDoingAction());
     }
 
+    void SyncronizeAIPos()
+    {
+        if (Network.isServer)
+        {
+            for (int i = 0; i < 50; i++)
+            {
+                if (AllAI[i] != null)
+                    nView.RPC("UpdateAITrans", RPCMode.All, i, AllAI[i].transform.position, AllAI[i].transform.localScale);
+            }
+        }
+    }
 
     void Update()
     {
-        nView.RPC("UpdateRtPlayerTrans", RPCMode.Others, MpLobby.MyIndex, LocalPlayer.transform.position, LocalPlayer.transform.localScale, LocalPlayerCha.IsDoingAction());
 
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i <50; i++)
         {
             if (AllAI[i] != null && !MpLobby.IsServer)
-                AllAI[i].transform.position = Vector3.SmoothDamp(AllAI[i].transform.position, AIsLastPos[i], ref AIVelocity[i], SyncornizeRate + 0.015f);//Mark, good(seems)
+                AllAI[i].transform.position = Vector3.SmoothDamp(AllAI[i].transform.position, AIsLastPos[i], ref AIVelocity[i], SyncornizeRate_AI + 0.015f);//Mark, good(seems)
 
         }
         if (!MpLobby.IsServer)
-            Master.transform.position = Vector3.SmoothDamp(Master.transform.position, MasterLastPos, ref MasterVelocity, SyncornizeRate + 0.015f);//Mark, good(seems)
+            Master.transform.position = Vector3.SmoothDamp(Master.transform.position, MasterLastPos, ref MasterVelocity, SyncornizeRate_MainChar + 0.015f);//Mark, good(seems)
 
         for (int i = 0; i < MpLobby.PlayerCount; i++)
         {
             if (AllAI[i] != null && i != MpLobby.MyIndex)
-                OtherPlayersRemote[i].transform.position = Vector3.SmoothDamp(OtherPlayersRemote[i].transform.position, RPLastPos[i], ref RPVelocity[i], SyncornizeRate + 0.015f);//Mark, good(seems)
+                OtherPlayersRemote[i].transform.position = Vector3.SmoothDamp(OtherPlayersRemote[i].transform.position, RPLastPos[i], ref RPVelocity[i], SyncornizeRate_MainChar + 0.015f);//Mark, good(seems)
         }
 
-       // if (!LockLocalMovement)
+        // if (!LockLocalMovement)
     }
 
 
@@ -129,11 +139,23 @@ public class NetworkControllerInGame : MonoBehaviour
         nView.RPC("RmoteResetAllStatus", RPCMode.All);
 
     }
+    public Text Board;
     public void BroadCastMessage(string Message)
     {
         nView.RPC("GotRemoteMEssage", RPCMode.All, Message);
     }
-    public Text Board;
+
+    public void SendMoveDir(float Dirx, float DirY, int NetworkId)
+    {
+        nView.RPC("GetRemoteDir", RPCMode.All, Dirx, DirY, NetworkId);
+    }
+
+    [RPC]
+    void GetRemoteDir(float Dirx, float DirY, int NetworkId)
+    {
+        AllAICon[NetworkId].UpdateMoveDecision_Remote(Dirx, DirY);
+    }
+
 
     [RPC]
     void GotRemoteMEssage(string Msg)
@@ -176,8 +198,8 @@ public class NetworkControllerInGame : MonoBehaviour
 
         if (AllAI[ObjIndex] != null)
         {
-            //   AllAI[ObjIndex].transform.position = NewPos;
-            AIsLastPos[ObjIndex] = NewPos;
+           // AllAI[ObjIndex].transform.position = NewPos;
+             AIsLastPos[ObjIndex] = NewPos;
             AllAI[ObjIndex].transform.localScale = NewScale;
             //  AllAICha[ObjIndex].Move(0.000001f, 0.000001f);//To play Animation
         }
@@ -193,7 +215,7 @@ public class NetworkControllerInGame : MonoBehaviour
         if (OtherPlayersRemote[ObjIndex] != null)
         {
             //OtherPlayersRemote[ObjIndex].transform.position = NewPos;
-             RPLastPos[ObjIndex] = NewPos;
+            RPLastPos[ObjIndex] = NewPos;
             OtherPlayersRemote[ObjIndex].transform.localScale = NewScale;
             OtherPlayersCha[ObjIndex].DoAction(IsAction);
             //OtherPlayersCha[ObjIndex].Move(0.000001f, 0.000001f);//To play Animation
@@ -242,9 +264,9 @@ public class NetworkControllerInGame : MonoBehaviour
         }
         else
         {
-          //  LockLocalMovement = true;
+            //  LockLocalMovement = true;
             LocalPlayerCha.Fall(NewDir);
-         //   StartCoroutine(UnlockAfter());
+            //   StartCoroutine(UnlockAfter());
         }
     }
 
